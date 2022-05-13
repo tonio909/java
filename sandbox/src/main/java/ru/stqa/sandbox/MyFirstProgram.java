@@ -15,7 +15,7 @@ public class MyFirstProgram {
         double xb = 3.2464;
         double ya = 4.3907;
         double yb = 5.7832;
-        System.out.println("Distance between points with coordinates " + xa + ", " + xb + ", " + ya + ", " + yb + " is: " +distance(xa, xb, ya, yb));
+        System.out.println("Distance between points with coordinates " + xa + ", " + xb + ", " + ya + ", " + yb + " is: " + distance(xa, xb, ya, yb));
 
         //run via method in Point class
         Point points = new Point(2.3556, 3.2464, 4.3907, 5.7832);
