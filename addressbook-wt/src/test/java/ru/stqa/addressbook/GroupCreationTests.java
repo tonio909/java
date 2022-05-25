@@ -22,10 +22,11 @@ public class GroupCreationTests {
   }
 
   @Test
-  public void testGroupCreation1() throws Exception {
+  public void testGroupCreation() throws Exception {
     goToGroupPage();
     initGroupCreation();
     fillGroupForm(new GroupData("Gname", "Gheader", "Gfooter"));
+    deleteAnyCreatedGroup();
     returnToGroupPageAndLogout();
   }
 
@@ -42,10 +43,16 @@ public class GroupCreationTests {
     wd.findElement(By.name("group_header")).sendKeys(gd.getHeader());
     wd.findElement(By.name("group_footer")).sendKeys(gd.getFooter());
     wd.findElement(By.name("submit")).click();
+    wd.findElement(By.linkText("groups")).click();
+  }
+
+  private void deleteAnyCreatedGroup() {
+    wd.findElement(By.name("selected[]")).click();
+    wd.findElement(By.name("delete")).click();
   }
 
   private void returnToGroupPageAndLogout() {
-    wd.findElement(By.linkText("group page")).click();
+    wd.findElement(By.linkText("groups")).click();
     wd.findElement(By.linkText("Logout")).click();
   }
 
