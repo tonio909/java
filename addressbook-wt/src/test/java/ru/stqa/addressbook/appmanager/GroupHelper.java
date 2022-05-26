@@ -5,7 +5,11 @@ import org.openqa.selenium.WebDriver;
 import ru.stqa.addressbook.model.GroupData;
 
 public class GroupHelper {
-    public WebDriver wd;
+    private WebDriver wd;
+
+    public GroupHelper(WebDriver wd) {
+        this.wd = wd;
+    }
 
     public void initGroupCreation() {
         wd.findElement(By.name("new")).click();
