@@ -6,28 +6,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ApplicationManager {
     public WebDriver wd;
+    public NavigationHelper navigationHelper;
     public GroupHelper groupHelper;
+    public SessionHelper sessionHelper;
 
     public void init() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         wd = new ChromeDriver();
         groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
+        sessionHelper = new SessionHelper(wd);
         wd.get("http://localhost/addressbook/");
-        login("admin", "secret");
+        sessionHelper.login("admin", "secret");
     }
 
     public void stop() {
         wd.quit();
-    }
-
-    public void login(String login, String password) {
-        wd.findElement(By.xpath("//input[@name='user']")).sendKeys(login);
-        wd.findElement(By.xpath("//input[@name='pass']")).sendKeys(password);
-        wd.findElement(By.xpath("//input[@value='Login']")).click();
-    }
-
-    public void goToGroupPage() {
-        wd.findElement(By.linkText("groups")).click();
     }
 
     public void returnToGroupPageAndLogout() {
@@ -35,7 +29,12 @@ public class ApplicationManager {
         wd.findElement(By.linkText("Logout")).click();
     }
 
+    ///getters
     public GroupHelper getGroupHelper() {
         return groupHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
