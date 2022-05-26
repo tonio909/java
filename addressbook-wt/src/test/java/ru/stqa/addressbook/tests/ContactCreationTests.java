@@ -1,9 +1,10 @@
-package ru.stqa.addressbook;
+package ru.stqa.addressbook.tests;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
+import ru.stqa.addressbook.model.ContactData;
 
 public class ContactCreationTests {
     private WebDriver wd;

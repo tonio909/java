@@ -1,24 +1,21 @@
-package ru.stqa.addressbook;
+package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import ru.stqa.addressbook.model.GroupData;
 
-public class TestBase {
+public class ApplicationManager {
     public WebDriver wd;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
+    public void init() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         wd = new ChromeDriver();
         wd.get("http://localhost/addressbook/");
         login("admin", "secret");
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
+    public void stop() {
         wd.quit();
     }
 
