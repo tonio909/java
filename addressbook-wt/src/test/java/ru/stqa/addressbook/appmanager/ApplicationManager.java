@@ -9,6 +9,7 @@ public class ApplicationManager {
     public NavigationHelper navigationHelper;
     public GroupHelper groupHelper;
     public SessionHelper sessionHelper;
+    public ContactHelper contactHelper;
 
     public void init() {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
@@ -16,6 +17,7 @@ public class ApplicationManager {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        contactHelper = new ContactHelper(wd);
         wd.get("http://localhost/addressbook/");
         sessionHelper.login("admin", "secret");
     }
@@ -29,6 +31,14 @@ public class ApplicationManager {
         wd.findElement(By.linkText("Logout")).click();
     }
 
+    public void saveForm() {
+        wd.findElement(By.name("submit")).click();
+    }
+
+    public void logout() {
+        wd.findElement(By.xpath("//a[normalize-space()='Logout']")).click();
+    }
+
     ///getters
     public GroupHelper getGroupHelper() {
         return groupHelper;
@@ -36,5 +46,9 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }
