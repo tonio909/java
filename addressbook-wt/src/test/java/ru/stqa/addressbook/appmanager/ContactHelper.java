@@ -28,4 +28,16 @@ public class ContactHelper extends HelperBase{
         type(By.name("byear"), cd.getYear());
     }
 
+    public void openExistingContact() {
+        click(By.xpath("//tbody/tr[3]/td[8]/a[1]/img[1]"));
+    }
+
+    public void selectFirstContactInList() {
+        click(By.xpath("//input[@id='1']"));
+    }
+
+    public void deleteContactAndAccept() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
 }
