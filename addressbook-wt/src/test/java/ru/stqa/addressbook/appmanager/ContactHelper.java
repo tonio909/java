@@ -29,15 +29,25 @@ public class ContactHelper extends HelperBase{
     }
 
     public void openExistingContact() {
-        click(By.xpath("//tbody/tr[3]/td[8]/a[1]/img[1]"));
+        click(By.xpath("//tbody/tr[2]/td[8]/a[1]/img[1]"));
+    }
+
+    public void saveContactFormAndReturn() {
+        wd.findElement(By.name("submit")).click();
+        wd.findElement(By.xpath("//a[normalize-space()='home page']")).click();
     }
 
     public void selectFirstContactInList() {
-        click(By.xpath("//input[@id='1']"));
+        click(By.name("selected[]"));
     }
 
     public void deleteContactAndAccept() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+    }
+
+    public void createContact(ContactData cd) {
+        fillContactForm(cd);
+        saveContactFormAndReturn();
     }
 }

@@ -1,6 +1,7 @@
 package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -24,5 +25,14 @@ public class HelperBase {
     public void select(By locator, String visibleText) {
         Select selector = new Select(wd.findElement(locator));
         selector.selectByVisibleText(visibleText);
+    }
+
+    public boolean isElementMissing(By locator) {
+        try {
+            wd.findElement(locator).isDisplayed();
+            return false;
+        } catch (NoSuchElementException noSuchElementException) {
+            return true;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -42,10 +43,6 @@ public class ApplicationManager {
     public void returnToGroupPageAndLogout() {
         wd.findElement(By.linkText("groups")).click();
         wd.findElement(By.linkText("Logout")).click();
-    }
-
-    public void saveForm() {
-        wd.findElement(By.name("submit")).click();
     }
 
     public void logout() {
