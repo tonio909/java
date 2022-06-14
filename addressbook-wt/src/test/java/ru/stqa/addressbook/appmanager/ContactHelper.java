@@ -2,12 +2,18 @@ package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import ru.stqa.addressbook.model.ContactData;
+import java.util.*;
 
 public class ContactHelper extends HelperBase{
 
     public ContactHelper (WebDriver wd) {
         super(wd);
+    }
+
+    public void goToContactPage() {
+        click(By.xpath("//a[normalize-space()='home']"));
     }
 
     public void fillContactForm(ContactData cd) {
@@ -32,13 +38,17 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//tbody/tr[2]/td[8]/a[1]/img[1]"));
     }
 
-    public void saveContactFormAndReturn() {
-        wd.findElement(By.name("submit")).click();
+    public void saveContactFormAndReturn(boolean update) {
+        if (update) {
+            wd.findElement(By.name("update")).click();
+        } else {
+            wd.findElement(By.name("submit")).click();
+        }
         wd.findElement(By.xpath("//a[normalize-space()='home page']")).click();
     }
 
-    public void selectFirstContactInList() {
-        click(By.name("selected[]"));
+    public void selectContactByIndex(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteContactAndAccept() {
@@ -48,6 +58,17 @@ public class ContactHelper extends HelperBase{
 
     public void createContact(ContactData cd) {
         fillContactForm(cd);
-        saveContactFormAndReturn();
+        saveContactFormAndReturn(false);
+    }
+
+    public List<ContactData> listOfContacts() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> contact = wd.findElements(By.name("entry"));
+        for (WebElement cont : contact) {
+            String name = cont.getText();
+            ContactData cd = new ContactData(name, null, null, null,null,null,null,null,null,null,null,null,null,null);
+            contacts.add(cd);
+        }
+        return contacts;
     }
 }

@@ -1,12 +1,13 @@
 package ru.stqa.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
+
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
     public WebDriver wd;
@@ -28,6 +29,7 @@ public class ApplicationManager {
         } else if (browser.equals(BrowserType.EDGE)) {
              wd = new EdgeDriver();
         }
+        wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
@@ -38,11 +40,6 @@ public class ApplicationManager {
 
     public void stop() {
         wd.quit();
-    }
-
-    public void returnToGroupPageAndLogout() {
-        wd.findElement(By.linkText("groups")).click();
-        wd.findElement(By.linkText("Logout")).click();
     }
 
     public void logout() {
