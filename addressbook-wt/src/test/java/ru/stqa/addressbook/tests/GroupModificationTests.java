@@ -1,11 +1,11 @@
 package ru.stqa.addressbook.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.addressbook.model.GroupData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupModificationTests extends TestBase {
@@ -23,6 +23,9 @@ public class GroupModificationTests extends TestBase {
         app.getNavigationHelper().goToGroupPage();
         List<GroupData> after = app.getGroupHelper().getGroupsList();
         Assert.assertEquals(before.size(), after.size(), "1 group modified, groups count was not changed");
+
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+
         app.logout();
     }
 }
