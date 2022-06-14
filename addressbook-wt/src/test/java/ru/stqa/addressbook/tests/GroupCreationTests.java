@@ -12,7 +12,7 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation() throws Exception {
         app.getNavigationHelper().goToGroupPage();
         int before = app.getGroupHelper().getGroupsList().size();
-        app.getGroupHelper().createGroup(new GroupData("GroupName", "GroupHeader", "GroupFooter"));
+        app.getGroupHelper().createGroup(new GroupData(null,"GroupName", "GroupHeader", "GroupFooter"));
         app.getNavigationHelper().goToGroupPage();
         int after = app.getGroupHelper().getGroupsList().size();
         Assert.assertEquals(before + 1, after, "1 group added");

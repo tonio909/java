@@ -52,7 +52,8 @@ public class GroupHelper extends HelperBase {
         List<WebElement> elementsOnPage = wd.findElements(By.xpath("//span[@class='group']"));
         for (WebElement elem : elementsOnPage) {
             String groupName = elem.getText();
-            GroupData groups = new GroupData(groupName, null, null);
+            String elementValue = elem.getAttribute("value");
+            GroupData groups = new GroupData(elementValue, groupName, null, null);
             gd.add(groups);
         }
         return gd;
